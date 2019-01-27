@@ -19,12 +19,13 @@ _daemon() {
 
 
 main() {
-  local fifo="$1"
+  # TODO: check whether room is available
+  _daemon "$1"
   local date time user line
   while read date time user line; do
     user="${user//[():]/}";
     terminal-notifier -message "$line" -title "GITTER" -subtitle "$user";
-  done < $fifo
+  done < "$gitter_notifier_fifo_name"
 }
 
 main $@
