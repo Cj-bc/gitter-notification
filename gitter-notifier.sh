@@ -4,6 +4,18 @@
 # This software is released under MIT License
 #
 # @(#) version -
+# _daemon(): pull new gitter post {{{2
+# @param <string room_name>
+# @return <string daemon_PID>
+_daemon() {
+  local room="$1"
+  mkfifo "$gitter_notifier_fifo_name"
+  gitter-cli s --room "$room" > $gitter_notifier_fifo_name &
+  daemon_pid="$!"
+}
+# }}}
+}
+# }}}
 
 
 main() {
