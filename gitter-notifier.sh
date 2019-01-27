@@ -7,6 +7,16 @@
 
 gitter_notifier_fifo_name=".gitter_notifier_$(date +%Y%m%d%H%M).fifo"
 
+# _help: echo help messages {{{2
+function _help()
+{
+  local README="README.md"
+  local usage_with_padding
+  usage_with_padding="$(sed -n -e '/## usage/, /## .*/ p' -e '/## .*/d' "$README")"
+  echo "$(echo "$usage_with_padding")"
+}
+# }}}
+
 # _daemon(): pull new gitter post {{{2
 # @param <string room_name>
 # @return <string daemon_PID>
