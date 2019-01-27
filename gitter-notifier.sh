@@ -27,5 +27,8 @@ main() {
     terminal-notifier -message "$line" -title "GITTER" -subtitle "$user";
   done < "$gitter_notifier_fifo_name"
 }
+case "$1" in
+  "-h"|"help"|"--help") _help;;
+  *) main $@;;
+esac
 
-main $@
