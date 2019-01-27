@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 #
+# gitter-notifier -- pop up notification when you get new post in gitter
+#
 # Copyright 2019 (c) Cj-bc
 # This software is released under MIT License
 #
-# @(#) version -
+# @(#) version 0.1.0
 
 gitter_notifier_fifo_name=".gitter_notifier_$(date +%Y%m%d%H%M).fifo"
 
