@@ -4,6 +4,9 @@
 # This software is released under MIT License
 #
 # @(#) version -
+
+gitter_notifier_fifo_name=".gitter_notifier_$(date +%Y%m%d%H%M).fifo"
+
 # _daemon(): pull new gitter post {{{2
 # @param <string room_name>
 # @return <string daemon_PID>
