@@ -21,9 +21,12 @@ function _version()
 # _help: echo help messages {{{2
 function _help()
 {
+  local regex_usage_region='/# usage.*/, /#.*/'
+  local regex_tag='#.*'
+  local regex_notext='^$'
   local README="README.md"
   local usage_with_padding
-  usage_with_padding="$(sed -n -e '/## usage/, /## .*/ p' -e '/## .*/d' "$README")"
+  usage_with_padding="$(sed -n -e "$regex_usage_region p" "$README" |grep -v "$regex_tag" |grep -v "$regex_notext")"
   echo "$(echo "$usage_with_padding")"
 }
 # }}}
