@@ -14,6 +14,16 @@ _daemon() {
   daemon_pid="$!"
 }
 # }}}
+
+
+# _cleanup: clean up after execution.called from trap {{{2
+# @param <string daemon_pid>
+function _cleanup()
+{
+  kill $1
+  rm "$gitter_notifier_fifo_name"
+  trap SIGINT
+  trap SIGTERM
 }
 # }}}
 
@@ -21,6 +31,8 @@ _daemon() {
 main() {
   # TODO: check whether room is available
   _daemon "$1"
+  trap "_cleanup $daemon_pid" SIGINT
+  trap "_cleanup $daemon_pid" SIGTERM
   local date time user line
   while read date time user line; do
     user="${user//[():]/}";
