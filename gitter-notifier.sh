@@ -9,6 +9,15 @@
 
 gitter_notifier_fifo_name=".gitter_notifier_$(date +%Y%m%d%H%M).fifo"
 
+# _version: echo version {{{2
+function _version()
+{
+  local self="${BASH_SOURCE[0]}"
+  versionline="$(grep '# @(#) version 0.1.0' "$self" | head -n 1)"
+  echo "${versionline/\# @(\#)/gitter-notifier:}"
+}
+# }}}
+
 # _help: echo help messages {{{2
 function _help()
 {
@@ -78,6 +87,7 @@ main() {
 
 case "$1" in
   "-h"|"help"|"--help") _help;;
+  "-v"|"version"|"--version") _version;;
   *) main $@;;
 esac
 
