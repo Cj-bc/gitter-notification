@@ -6,10 +6,13 @@
 # @(#) version -
 
 
-local fifo="$1"
-local date time user line
-while read date time user line; do
-  user="${user//[():]/}";
-  terminal-notifier -message "$line" -title "GITTER" -subtitle "$user";
-done < $fifo
+main() {
+  local fifo="$1"
+  local date time user line
+  while read date time user line; do
+    user="${user//[():]/}";
+    terminal-notifier -message "$line" -title "GITTER" -subtitle "$user";
+  done < $fifo
+}
 
+main $@
